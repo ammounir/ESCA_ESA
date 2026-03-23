@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Offres Formation ESCA × ESA Paris</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a18; padding: 32px 24px; }
+  .container { max-width: 820px; margin: 0 auto; }
+
+  /* Header principal */
+  .main-header { text-align: center; margin-bottom: 36px; }
+  .main-header h1 { font-size: 22px; font-weight: 600; color: #1a1a18; }
+  .main-header p { font-size: 13px; color: #5f5e5a; margin-top: 6px; }
+  .logo-line { font-size: 13px; font-weight: 500; color: #0F6E56; margin-bottom: 6px; letter-spacing: 0.03em; }
+
+  /* Offre header */
+  .offre-header { border-radius: 12px; padding: 14px 18px; margin-bottom: 12px; }
+  .offre-a { background: #E1F5EE; border: 1px solid #5DCAA5; }
+  .offre-b { background: #EEEDFE; border: 1px solid #AFA9EC; }
+  .offre-header h2 { font-size: 16px; font-weight: 600; }
+  .offre-a h2 { color: #085041; }
+  .offre-b h2 { color: #3C3489; }
+  .offre-header p { font-size: 12px; margin-top: 3px; }
+  .offre-a p { color: #0F6E56; }
+  .offre-b p { color: #534AB7; }
+
+  /* Context box */
+  .context-box { border-radius: 0 8px 8px 0; padding: 9px 14px; margin-bottom: 14px; font-size: 12px; color: #444441; }
+  .ctx-teal { background: #f0faf6; border-left: 3px solid #5DCAA5; }
+  .ctx-purple { background: #f5f4fe; border-left: 3px solid #AFA9EC; }
+
+  /* Cards */
+  .card { background: #fff; border: 1px solid #e8e6df; border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+  .card-header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; cursor: pointer; user-select: none; }
+  .card-header:hover { background: #fafaf8; }
+  .badge { border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .badge-teal { background: #E1F5EE; color: #085041; border: 1px solid #9FE1CB; }
+  .badge-purple { background: #EEEDFE; color: #3C3489; border: 1px solid #CECBF6; }
+  .card-info { flex: 1; }
+  .card-title { font-size: 13px; font-weight: 600; color: #1a1a18; }
+  .card-sub { font-size: 11px; color: #888780; margin-top: 2px; }
+  .chevron { font-size: 14px; color: #b4b2a9; transition: transform 0.2s; }
+  .chevron.open { transform: rotate(90deg); }
+
+  /* Detail */
+  .detail { display: none; padding: 0 14px 14px; border-top: 1px solid #f0ede6; }
+  .detail.open { display: block; }
+  .section-label { font-size: 10px; font-weight: 600; color: #888780; text-transform: uppercase; letter-spacing: 0.07em; margin: 10px 0 6px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 5px; }
+  .pill { border-radius: 20px; padding: 3px 10px; font-size: 11px; border: 1px solid; }
+  .pill-teal { background: #E1F5EE; color: #085041; border-color: #9FE1CB; }
+  .pill-purple { background: #EEEDFE; color: #3C3489; border-color: #CECBF6; }
+  .pill-gray { background: #f5f4f0; color: #5f5e5a; border-color: #d3d1c7; }
+  .pill-note { background: #fafaf8; color: #888780; border-color: #e8e6df; font-style: italic; }
+
+  /* Séparateur */
+  .divider { height: 1px; background: #d3d1c7; margin: 24px 0; }
+
+  /* Certifications */
+  .cert-box { background: #fff; border: 1px solid #e8e6df; border-radius: 10px; padding: 14px 16px; margin-top: 10px; }
+  .cert-title { font-size: 10px; font-weight: 600; color: #888780; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 10px; }
+  .cert-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* Footer */
+  .footer { text-align: center; margin-top: 32px; font-size: 11px; color: #b4b2a9; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="main-header">
+    <div class="logo-line">ESCA École de Management × ESA Paris</div>
+    <h1>Offres de Formation — Secteur de l'Assurance au Maroc</h1>
+    <p>En partenariat avec la FMA · FNACAM · Académies des compagnies</p>
+  </div>
+
+  <!-- OFFRE A -->
+  <div class="offre-header offre-a">
+    <h2>Offre A — Fondamentaux assurance Maroc</h2>
+    <p>Socle universel · Toute nouvelle recrue · 8 modules · Prérequis aux Parcours B</p>
+  </div>
+  <div class="context-box ctx-teal">
+    Objectif : doter toute nouvelle recrue d'une compréhension complète du secteur, de ses métiers, de son environnement réglementaire et de ses outils — quelle que soit sa fonction future.
+  </div>
+
+  <!-- Modules A -->
+  <div class="card">
+    <div class="card-header" onclick="tog('a1')">
+      <span class="badge badge-teal">Module 1</span>
+      <div class="card-info"><div class="card-title">Environnement & acteurs du marché marocain</div><div class="card-sub">Structure · Régulateurs · Cadre légal</div></div>
+      <span class="chevron" id="chev-a1">›</span>
+    </div>
+    <div class="detail" id="a1">
+      <div class="section-label">Contenu</div>
+      <div class="pills">
+        <span class="pill pill-teal">Structure du marché marocain</span>
+        <span class="pill pill-teal">Rôle de l'ACAPS, FMA, FNACAM</span>
+        <span class="pill pill-gray">Les grandes compagnies & mutuelles</span>
+        <span class="pill pill-gray">Les branches d'assurance au Maroc</span>
+        <span class="pill pill-gray">Canaux de distribution (agents, courtiers, bancassurance)</span>
+        <span class="pill pill-gray">Chiffres clés & tendances du secteur</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('a2')">
+      <span class="badge badge-teal">Module 2</span>
+      <div class="card-info"><div class="card-title">Contrat d'assurance & réglementation</div><div class="card-sub">Loi 17-99 · Droits & obligations · Conformité</div></div>
+      <span class="chevron" id="chev-a2">›</span>
+    </div>
+    <div class="detail" id="a2">
+      <div class="section-label">Contenu</div>
+      <div class="pills">
+        <span class="pill pill-teal">Code des assurances (loi 17-99)</span>
+        <span class="pill pill-teal">Formation & vie du contrat</span>
+        <span class="pill pill-gray">Droits & obligations des parties</span>
+        <span class="pill pill-gray">Solvabilité basée sur les risques (SBR)</span>
+        <span class="pill pill-gray">IFRS 17 — principes de base</span>
+        <span class="pill pill-gray">Lutte anti-blanchiment (LAB/FT)</span>
+        <span class="pill pill-gray">Rôle & pouvoirs de l'ACAPS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('a3')">
+      <span class="badge badge-teal">Module 3</span>
+      <div class="card-info"><div class="card-title">Branches & produits d'assurance</div><div class="card-sub">Vie · Auto · IRD · RC · AT/MP · Personnes · Takaful</div></div>
+      <span class="chevron" id="chev-a3">›</span>
+    </div>
+    <div class="detail" id="a3">
+      <div class="section-label">Contenu</div>
+      <div class="pills">
+        <span class="pill pill-teal">Assurances de biens (auto, IRD, incendie)</span>
+        <span class="pill pill-teal">Assurances de personnes (vie, prévoyance, AMO)</span>
+        <span class="pill pill-gray">Responsabilité civile générale</span>
+        <span class="pill pill-gray">Accidents du travail & maladies professionnelles</span>
+        <span class="pill pill-gray">Transport & grands risques techniques</span>
+        <span class="pill pill-gray">Takaful — introduction & positionnement</span>
+        <span class="pill pill-gray">Produits émergents (cyber, paramétrique)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('a4')">
+      <span class="badge badge-teal">Module 4</span>
+      <div class="card-info"><div class="card-title">Principes de souscription</div><div class="card-sub">Introduction au métier · Logique d'entrée du risque</div></div>
+      <span class="chevron" id="chev-a4">›</span>
+    </div>
+    <div class="detail" id="a4">
+      <div class="section-label">Contenu</div>
+      <div class="pills">
+        <span class="pill pill-teal">Qu'est-ce que souscrire un risque ?</span>
+        <span class="pill pill-teal">Principes de sélection & d'acceptation</span>
+        <span class="pill pill-gray">Notions de tarification (introduction)</span>
+        <span class="pill pill-gray">Le contrat : conditions générales & particulières</span>
+        <span class="pill pill-gray">Introduction aux branches principales (auto, IRD, personnes)</span>
+      </div>
+      <div class="section-label">Niveau</div>
+      <div class="pills"><span class="pill pill-note">Introduction — approfondissement dans le Parcours B Souscripteur</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('a5')">
+      <span class="badge badge-teal">Module 5</span>
+      <div class="card-info"><div class="card-title">Principes de gestion des sinistres</div><div class="card-sub">Introduction au métier · Logique de sortie du risque</div></div>
+      <span class="chevron" id="chev-a5">›</span>
+    </div>
+    <div class="detail" id="a5">
+      <div class="section-label">Contenu</div>
+      <div class="pills">
+        <span class="pill pill-teal">Cycle de vie d'un sinistre (ouverture → clôture)</span>
+        <span class="pill pill-teal">Principes d'évaluation & d'indemnisation</span>
+        <span class="pill pill-gray">Relation client en situation de sinistre</span>
+        <span class="pill pill-gray">Notions de réserves & provisionnement</span>
+        <span class="pill pill-gray">Introduction aux conventions inter-compagnies (CIDA, CICA)</span>
+      </div>
+      <div class="section-label">Niveau</div>
+      <div class="pills"><span class="pill pill-note">Introduction — approfondissement dans le Parcours B Gestionnaire sinistres</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('a6')">
+      <span class="badge badge-teal">Module 6</span>
+      <div class="card-info"><div class="card-title">Actuariat & risk management pour non-spécialistes</div><div class="card-sub">Bases techniques · Lecture des résultats · Gestion des risques</div></div>
+      <span class="chevron" id="chev-a6">›</span>
+    </div>
+    <div class="detail" id="a6">
+      <div class="section-label">Contenu</div>
+      <div class="pills">
+        <span class="pill pill-teal">Bases du calcul actuariel (sans mathématiques avancées)</span>
+        <span class="pill pill-teal">Tables de mortalité & probabilité du risque</span>
+        <span class="pill pill-gray">Lecture des résultats techniques d'une compagnie</span>
+        <span class="pill pill-gray">Cartographie des risques — principes de base</span>
+        <span class="pill pill-gray">Introduction au SBR & à la gestion prudentielle</span>
+        <span class="pill pill-gray">Notion de réassurance — pourquoi & comment</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('a7')">
+      <span class="badge badge-teal">Module 7</span>
+      <div class="card-info"><div class="card-title">Data analytics & transformation digitale</div><div class="card-sub">Données · Pricing · Outils · Digital</div></div>
+      <span class="chevron" id="chev-a7">›</span>
+    </div>
+    <div class="detail" id="a7">
+      <div class="section-label">Contenu</div>
+      <div class="pills">
+        <span class="pill pill-teal">Exploitation des données clients en assurance</span>
+        <span class="pill pill-teal">Pricing & segmentation — logique de base</span>
+        <span class="pill pill-gray">Introduction à la data science appliquée à l'assurance</span>
+        <span class="pill pill-gray">Transformation digitale du secteur au Maroc</span>
+        <span class="pill pill-gray">Outils & plateformes de gestion</span>
+        <span class="pill pill-gray">Expérience client à l'ère digitale</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('a8')">
+      <span class="badge badge-teal">Module 8</span>
+      <div class="card-info"><div class="card-title">Distribution & animation commerciale</div><div class="card-sub">Réseaux · Techniques de vente · Relation client</div></div>
+      <span class="chevron" id="chev-a8">›</span>
+    </div>
+    <div class="detail" id="a8">
+      <div class="section-label">Contenu</div>
+      <div class="pills">
+        <span class="pill pill-teal">Canaux de distribution au Maroc</span>
+        <span class="pill pill-teal">Rôle & obligations de l'intermédiaire</span>
+        <span class="pill pill-gray">Techniques de vente & argumentation produits</span>
+        <span class="pill pill-gray">Animation & pilotage d'un réseau commercial</span>
+        <span class="pill pill-gray">Relation client & gestion des réclamations</span>
+        <span class="pill pill-gray">Bancassurance — principes & fonctionnement</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- OFFRE B -->
+  <div class="offre-header offre-b">
+    <h2>Offre B — Parcours professionnels spécialisés</h2>
+    <p>Co-construits avec les Académies · Tronc commun + modules par branche · Certification conjointe</p>
+  </div>
+  <div class="context-box ctx-purple">
+    Prérequis : Offre A validée. Chaque parcours combine un tronc commun obligatoire et des modules de spécialisation choisis selon l'activité de la compagnie ou le profil de l'intermédiaire.
+  </div>
+
+  <!-- Parcours B -->
+  <div class="card">
+    <div class="card-header" onclick="tog('b1')">
+      <span class="badge badge-purple">Parcours 1</span>
+      <div class="card-info"><div class="card-title">Souscripteur</div><div class="card-sub">Compagnies d'assurance · Entrée du risque</div></div>
+      <span class="chevron" id="chev-b1">›</span>
+    </div>
+    <div class="detail" id="b1">
+      <div class="section-label">Tronc commun</div>
+      <div class="pills">
+        <span class="pill pill-purple">Principes de souscription</span>
+        <span class="pill pill-purple">Analyse & sélection du risque</span>
+        <span class="pill pill-purple">Techniques de tarification</span>
+        <span class="pill pill-purple">Rédaction du contrat</span>
+        <span class="pill pill-purple">Réglementation ACAPS souscription</span>
+      </div>
+      <div class="section-label">Modules de spécialisation</div>
+      <div class="pills">
+        <span class="pill pill-gray">Auto — RC obligatoire, tarification</span>
+        <span class="pill pill-gray">Personnes — souscription médicale, vie</span>
+        <span class="pill pill-gray">IRD & multirisques — visite de risque</span>
+        <span class="pill pill-gray">Grands risques — ingénierie, co-assurance</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('b2')">
+      <span class="badge badge-purple">Parcours 2</span>
+      <div class="card-info"><div class="card-title">Gestionnaire sinistres</div><div class="card-sub">Compagnies d'assurance · Sortie du risque</div></div>
+      <span class="chevron" id="chev-b2">›</span>
+    </div>
+    <div class="detail" id="b2">
+      <div class="section-label">Tronc commun</div>
+      <div class="pills">
+        <span class="pill pill-purple">Process ouverture → clôture</span>
+        <span class="pill pill-purple">Évaluation & provisionnement</span>
+        <span class="pill pill-purple">Relation client en sinistre</span>
+        <span class="pill pill-purple">Aspects juridiques & contentieux</span>
+        <span class="pill pill-purple">Réglementation ACAPS sinistres</span>
+      </div>
+      <div class="section-label">Modules de spécialisation</div>
+      <div class="pills">
+        <span class="pill pill-gray">Auto matériels — CIDA, expertise, recours</span>
+        <span class="pill pill-gray">Auto corporels — CICA, barème BIRSA</span>
+        <span class="pill pill-gray">Personnes — liquidation, DIM, AMO</span>
+        <span class="pill pill-gray">AT/MP — loi 18-12, rentes, maladies prof.</span>
+        <span class="pill pill-gray">IRD — expertise contradictoire, pertes d'exploitation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('b3')">
+      <span class="badge badge-purple">Parcours 3</span>
+      <div class="card-info"><div class="card-title">Gestionnaire assurances de personnes</div><div class="card-sub">Compagnies vie · Caisses retraite · Organismes prévoyance</div></div>
+      <span class="chevron" id="chev-b3">›</span>
+    </div>
+    <div class="detail" id="b3">
+      <div class="section-label">Tronc commun</div>
+      <div class="pills">
+        <span class="pill pill-purple">Réforme protection sociale au Maroc</span>
+        <span class="pill pill-purple">Produits vie, prévoyance & épargne</span>
+        <span class="pill pill-purple">Contrats collectifs entreprises</span>
+        <span class="pill pill-purple">Liquidation des prestations</span>
+        <span class="pill pill-purple">IFC — calcul & provisionnement</span>
+        <span class="pill pill-purple">CMR, RCAR, CNSS & complémentaire privée</span>
+      </div>
+      <div class="section-label">Modules de spécialisation</div>
+      <div class="pills">
+        <span class="pill pill-gray">Vie & capitalisation — épargne, unités de compte</span>
+        <span class="pill pill-gray">Prévoyance collective — DIM, assurance emprunteur</span>
+        <span class="pill pill-gray">AMO & complémentaire santé</span>
+        <span class="pill pill-gray">Retraite & IFC — rentes, régimes complémentaires</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('b4a')">
+      <span class="badge badge-purple">Parcours 4A</span>
+      <div class="card-info"><div class="card-title">Animateur réseau</div><div class="card-sub">Compagnies · Pilotage des intermédiaires</div></div>
+      <span class="chevron" id="chev-b4a">›</span>
+    </div>
+    <div class="detail" id="b4a">
+      <div class="section-label">Tronc commun</div>
+      <div class="pills">
+        <span class="pill pill-purple">Distribution au Maroc — cadre ACAPS</span>
+        <span class="pill pill-purple">Animation & pilotage de la performance</span>
+        <span class="pill pill-purple">Outils de suivi & reporting réseau</span>
+        <span class="pill pill-purple">Techniques de vente & argumentation</span>
+        <span class="pill pill-purple">Relation compagnie / intermédiaire</span>
+      </div>
+      <div class="section-label">Modules de spécialisation</div>
+      <div class="pills">
+        <span class="pill pill-gray">Agents — portefeuille, développement, fidélisation</span>
+        <span class="pill pill-gray">Courtiers — appels d'offres, grands comptes</span>
+        <span class="pill pill-gray">Bancassurance — partenariat banque-assureur</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="tog('b4b')">
+      <span class="badge badge-purple">Parcours 4B</span>
+      <div class="card-info"><div class="card-title">Agent & courtier professionnel</div><div class="card-sub">Intermédiaires indépendants · FNACAM</div></div>
+      <span class="chevron" id="chev-b4b">›</span>
+    </div>
+    <div class="detail" id="b4b">
+      <div class="section-label">Tronc commun</div>
+      <div class="pills">
+        <span class="pill pill-purple">Réglementation intermédiation (loi 17-99)</span>
+        <span class="pill pill-purple">Déontologie & obligations professionnelles</span>
+        <span class="pill pill-purple">Connaissance des produits d'assurance</span>
+        <span class="pill pill-purple">Techniques de conseil & vente</span>
+        <span class="pill pill-purple">Gestion administrative du cabinet</span>
+      </div>
+      <div class="section-label">Modules de spécialisation</div>
+      <div class="pills">
+        <span class="pill pill-gray">Développement commercial — prospection, fidélisation</span>
+        <span class="pill pill-gray">Conseil personnes — prévoyance, épargne, retraite</span>
+        <span class="pill pill-gray">Sinistres côté intermédiaire — suivi & accompagnement</span>
+        <span class="pill pill-gray">Digital & outils</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certifications -->
+  <div class="cert-box">
+    <div class="cert-title">Certifications</div>
+    <div class="cert-row">
+      <span class="pill pill-teal">Offre A → Attestation ESCA × ESA Paris</span>
+      <span class="pill pill-purple">Parcours 1, 2, 3, 4A → Certificat Académie [Compagnie] × ESCA × ESA Paris</span>
+      <span class="pill pill-purple">Parcours 4B → Certificat FNACAM × ESCA × ESA Paris</span>
+    </div>
+  </div>
+
+  <div class="footer">ESCA École de Management × ESA Paris · Partenariat stratégique secteur assurance Maroc</div>
+
+</div>
+<script>
+function tog(id) {
+  var d = document.getElementById(id);
+  var c = document.getElementById('chev-' + id);
+  var o = d.classList.contains('open');
+  d.classList.toggle('open', !o);
+  c.classList.toggle('open', !o);
+}
+</script>
+</body>
+</html>
