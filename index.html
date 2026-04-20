@@ -1,429 +1,328 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ESCA × ESA Paris — Formation Assurance Maroc</title>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #1a1a18; color: #1a1a18; height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans, system-ui); color: var(--color-text-primary); padding: 2rem 1.5rem; }
+.label-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 0.5rem; }
+.divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 2rem 0; }
+.section-title { font-size: 16px; font-weight: 500; margin-bottom: 0.5rem; }
+.section-sub { font-size: 13px; color: var(--color-text-secondary); margin-bottom: 1.25rem; line-height: 1.6; }
 
-  .slides-area { flex: 1; overflow: hidden; position: relative; }
-  .slide { display: none; width: 100%; height: 100%; padding: 32px 60px 20px; flex-direction: column; justify-content: center; background: #f5f4f0; position: absolute; top: 0; left: 0; }
-  .slide.active { display: flex; }
+/* ── HEADER ── */
+.page-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.page-header .ph-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-secondary); margin-bottom: 0.5rem; }
+.page-header h1 { font-size: 22px; font-weight: 500; line-height: 1.4; margin-bottom: 0.75rem; }
+.page-header .ph-update { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
 
-  .nav { width: 100%; background: #fff; border-top: 1px solid #e8e6df; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 10px 24px; flex-shrink: 0; }
-  .nav-btn { background: none; border: 1px solid #d3d1c7; cursor: pointer; font-size: 16px; color: #5f5e5a; padding: 4px 14px; border-radius: 20px; }
-  .nav-btn:hover { background: #f0ede6; }
-  .nav-btn:disabled { opacity: 0.3; cursor: default; }
-  .nav-dots { display: flex; gap: 6px; align-items: center; }
-  .ndot { width: 7px; height: 7px; border-radius: 50%; background: #d3d1c7; cursor: pointer; transition: background 0.2s, transform 0.2s; }
-  .ndot.active { background: #1a1a18; transform: scale(1.3); }
-  .slide-counter { font-size: 11px; color: #888780; min-width: 36px; text-align: center; }
+/* Offre A supprimée */
+.offre-a-box { background: var(--color-background-secondary); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 2rem; display: flex; align-items: flex-start; gap: 12px; }
+.offre-a-box .oa-badge { font-size: 11px; font-weight: 500; background: #FCEBEB; color: #A32D2D; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.offre-a-box .oa-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+.offre-a-box .oa-text strong { font-weight: 500; color: var(--color-text-primary); }
 
-  /* Cover */
-  .slide-cover { background: #1a1a18; align-items: center; text-align: center; }
-  .logo-line { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 8px; color: #5DCAA5; }
-  .slide-cover h1 { font-size: 30px; font-weight: 600; color: #fff; line-height: 1.3; margin-bottom: 12px; max-width: 600px; }
-  .slide-cover p { font-size: 14px; color: #888780; }
-  .cover-badges { display: flex; gap: 10px; justify-content: center; margin-top: 24px; flex-wrap: wrap; }
-  .cover-badge { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: #d3d1c7; }
+/* ── OFFRE B ── */
+.offer-section { margin-bottom: 3rem; }
+.offer-title { font-size: 20px; font-weight: 500; margin-bottom: 0.4rem; }
+.offer-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; max-width: 600px; margin-bottom: 1.5rem; }
 
-  .slide-tag { display: inline-block; border-radius: 6px; padding: 3px 12px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
-  .tag-teal { background: #E1F5EE; color: #085041; border: 1px solid #9FE1CB; }
-  .tag-purple { background: #EEEDFE; color: #3C3489; border: 1px solid #CECBF6; }
-  .tag-amber { background: #FAEEDA; color: #633806; border: 1px solid #FAC775; }
-  .tag-gray { background: #f5f4f0; color: #444441; border: 1px solid #d3d1c7; }
+.value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 2rem; }
+.value-card { background: var(--color-background-secondary); border-radius: 12px; padding: 1.1rem 1.25rem; }
+.vc-num { font-size: 22px; font-weight: 500; color: #1D9E75; margin-bottom: 6px; }
+.vc-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+.vc-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.vc-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.vc-badge { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 10px; }
+.vc-badge.g { background: #E1F5EE; color: #0F6E56; }
+.vc-badge.p { background: #EEEDFE; color: #3C3489; }
+.vc-badge.b { background: #E6F1FB; color: #185FA5; }
+.vc-badge.a { background: #FAEEDA; color: #633806; }
 
-  .slide h2 { font-size: 22px; font-weight: 600; color: #1a1a18; margin-bottom: 4px; }
-  .subtitle { font-size: 12px; color: #888780; margin-bottom: 20px; }
+.parcours-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.tab { font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; transition: all 0.15s; }
+.tab:hover { color: var(--color-text-primary); border-color: var(--color-border-primary); }
+.tab.active { background: #0F6E56; color: #E1F5EE; border-color: #0F6E56; }
 
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
-  .four-col { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+.parcours-panel { display: none; }
+.parcours-panel.visible { display: block; }
 
-  .card { background: #fff; border: 1px solid #e8e6df; border-radius: 10px; padding: 14px 16px; }
-  .card-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
-  .card h3 { font-size: 13px; font-weight: 600; color: #1a1a18; margin-bottom: 4px; }
-  .card p { font-size: 12px; color: #5f5e5a; line-height: 1.5; }
+.certif-banner { border-radius: 10px; padding: 12px 16px; margin-bottom: 1.25rem; display: flex; align-items: flex-start; gap: 12px; background: #EEEDFE; }
+.cb-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.cb-body { flex: 1; }
+.cb-title { font-size: 13px; font-weight: 500; color: #3C3489; margin-bottom: 4px; }
+.cb-badges { display: flex; flex-wrap: wrap; gap: 5px; }
+.cb-badge { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 10px; background: #CECBF6; color: #26215C; }
+.cb-badge.fn { background: #9FE1CB; color: #04342C; }
 
-  .blist { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 9px; }
-  .blist li { display: flex; gap: 10px; font-size: 12px; color: #444441; line-height: 1.5; align-items: flex-start; }
-  .blist li .bull { font-weight: 700; flex-shrink: 0; }
+.panel-header { margin-bottom: 1rem; }
+.panel-header h2 { font-size: 17px; font-weight: 500; margin-bottom: 3px; }
+.panel-header .panel-sub { font-size: 13px; color: var(--color-text-secondary); }
+.cible-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.cible-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-text-secondary); white-space: nowrap; }
+.cible-val { font-size: 13px; }
 
-  .sub-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #888780; margin: 12px 0 6px; }
-  .col-box { background: #fff; border: 1px solid #e8e6df; border-radius: 10px; padding: 14px 16px; }
+.legend { display: flex; gap: 16px; margin-bottom: 1rem; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--color-text-secondary); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.legend-dot.inter { background: #1D9E75; }
+.legend-dot.adv { background: #534AB7; }
 
-  .pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
-  .pill { border-radius: 20px; padding: 3px 10px; font-size: 11px; border: 1px solid; }
-  .pill-teal { background: #E1F5EE; color: #085041; border-color: #9FE1CB; }
-  .pill-purple { background: #EEEDFE; color: #3C3489; border-color: #CECBF6; }
-  .pill-amber { background: #FAEEDA; color: #633806; border-color: #FAC775; }
-  .pill-gray { background: #f5f4f0; color: #5f5e5a; border-color: #d3d1c7; }
+.modules-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.25rem; }
+.module-row { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 10px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 12px; }
+.module-row.advanced { border-left: 2px solid #534AB7; }
+.module-num { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); min-width: 24px; padding-top: 2px; }
+.module-content { flex: 1; }
+.module-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+.module-themes { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.level-badge { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+.level-badge.inter { background: #E1F5EE; color: #0F6E56; }
+.level-badge.adv { background: #EEEDFE; color: #534AB7; }
 
-  /* Slide 5 — Offres horizontales */
-  .offres-col { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-  .offre-band { border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; gap: 20px; }
-  .offre-band-a { background: #E1F5EE; border: 1px solid #9FE1CB; margin-right: 12px; }
-  .offre-band-b { background: #EEEDFE; border: 1px solid #CECBF6; margin-right: 12px; }
-  .offre-band-c { background: #FAEEDA; border: 1px solid #FAC775; }
-  .offre-band .olabel { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
-  .olabel-a { color: #085041; }
-  .olabel-b { color: #3C3489; }
-  .olabel-c { color: #633806; }
-  .offre-band h3 { font-size: 14px; font-weight: 600; color: #1a1a18; margin-bottom: 6px; }
-  .offre-band .oitem { font-size: 12px; color: #444441; display: flex; gap: 7px; }
-  .offre-band .oitem::before { content: "—"; opacity: 0.4; flex-shrink: 0; }
-  .offre-band .opill { display: inline-block; border-radius: 20px; padding: 3px 10px; font-size: 11px; border: 1px solid; margin-top: 4px; }
-  .opill-a { background: #fff; color: #085041; border-color: #9FE1CB; }
-  .opill-b { background: #fff; color: #3C3489; border-color: #CECBF6; }
-  .opill-c { background: #fff; color: #633806; border-color: #FAC775; }
+.formateur-note { background: var(--color-background-secondary); border-radius: 8px; padding: 9px 13px; font-size: 12px; color: var(--color-text-secondary); margin-bottom: 1.25rem; line-height: 1.6; }
+.formateur-note strong { font-weight: 500; color: var(--color-text-primary); }
 
-  /* Offre B — parcours expandables */
-  .parcours-list { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-  .parcours-item { background: #fff; border: 1px solid #e8e6df; border-radius: 10px; overflow: hidden; }
-  .parcours-header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; user-select: none; transition: background 0.15s; }
-  .parcours-header:hover { background: #f5f4fe; }
-  .pnum { font-size: 10px; font-weight: 700; color: #534AB7; text-transform: uppercase; letter-spacing: 0.06em; background: #EEEDFE; border: 1px solid #CECBF6; border-radius: 6px; padding: 2px 9px; white-space: nowrap; }
-  .ptitle { font-size: 13px; font-weight: 600; color: #1a1a18; flex: 1; }
-  .psub-line { font-size: 11px; color: #888780; }
-  .pchev { font-size: 14px; color: #b4b2a9; transition: transform 0.2s; flex-shrink: 0; }
-  .pchev.open { transform: rotate(90deg); }
-  .parcours-detail { display: none; padding: 0 16px 14px; border-top: 1px solid #f0ede6; }
-  .parcours-detail.open { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-top: 12px; }
-  .slide-7-inner { overflow-y: auto; max-height: calc(100vh - 160px); padding-right: 4px; }
-  .det-section { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: #534AB7; margin-bottom: 6px; }
-  .det-item { font-size: 11px; color: #5f5e5a; display: flex; gap: 6px; margin-bottom: 3px; line-height: 1.4; }
-  .det-item::before { content: "·"; color: #AFA9EC; flex-shrink: 0; }
+/* ── OFFRE C ── */
+.offre-c { background: var(--color-background-primary); }
+.c-hero { margin-bottom: 1.75rem; }
+.c-hero h2 { font-size: 20px; font-weight: 500; margin-bottom: 0.4rem; }
+.c-hero p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; max-width: 600px; }
+.c-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+.c-badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
+.c-badge.amber { background: #FAEEDA; color: #633806; }
+.c-badge.purple { background: #EEEDFE; color: #3C3489; }
+.c-badge.teal { background: #E1F5EE; color: #0F6E56; }
 
-  /* Study tour */
-  .tour-item { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 9px; }
-  .tdot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
-  .dot-amber { background: #BA7517; }
-  .dot-coral { background: #D85A30; }
-  .tour-text { font-size: 12px; color: #444441; line-height: 1.4; }
-  .tour-sub { font-size: 11px; color: #888780; }
+.c-certif { background: #FAEEDA; border-radius: 10px; padding: 12px 16px; margin-bottom: 1.75rem; display: flex; align-items: flex-start; gap: 12px; }
+.c-certif .cc-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.c-certif .cc-title { font-size: 13px; font-weight: 500; color: #633806; margin-bottom: 4px; }
+.c-certif .cc-badges { display: flex; flex-wrap: wrap; gap: 5px; }
+.cc-badge { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 10px; background: #FAC775; color: #412402; }
 
-  .cert-card { background: #fff; border: 1px solid #e8e6df; border-radius: 10px; padding: 14px 16px; }
-  .cert-card .clabel { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
-  .cert-card .cvalue { font-size: 12px; font-weight: 600; color: #1a1a18; margin-bottom: 3px; }
-  .cert-card .csub { font-size: 11px; color: #888780; }
+.c-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.75rem; }
+.c-col-title { font-size: 13px; font-weight: 500; margin-bottom: 0.75rem; }
+.c-theme-list { display: flex; flex-direction: column; gap: 7px; }
+.c-theme { background: var(--color-background-secondary); border-radius: 8px; padding: 9px 13px; }
+.c-theme-title { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+.c-theme-sub { font-size: 12px; color: var(--color-text-secondary); line-height: 1.4; }
+
+.c-studytour { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1.75rem; }
+.c-studytour h3 { font-size: 14px; font-weight: 500; margin-bottom: 1rem; }
+.c-st-list { display: flex; flex-direction: column; gap: 8px; }
+.c-st-item { display: flex; gap: 10px; align-items: flex-start; }
+.c-st-dot { width: 6px; height: 6px; border-radius: 50%; background: #BA7517; flex-shrink: 0; margin-top: 6px; }
+.c-st-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
+.c-st-text strong { font-weight: 500; color: var(--color-text-primary); }
+
+.c-cible { background: var(--color-background-secondary); border-radius: 10px; padding: 1rem 1.25rem; }
+.c-cible-title { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+.c-cible-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.c-cible-pill { font-size: 12px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: 20px; padding: 3px 12px; color: var(--color-text-secondary); }
+
+@media (max-width: 500px) { .c-grid { grid-template-columns: 1fr; } }
 </style>
-</head>
-<body>
-<div class="slides-area">
 
-  <!-- SLIDE 1 — Cover -->
-  <div class="slide slide-cover active" id="slide-1">
-    <div class="logo-line">ESCA École de Management × ESA Paris</div>
-    <h1>Formation aux métiers de l'assurance au Maroc</h1>
-    <p>En partenariat avec la FMA & la FNACAM</p>
-    <div class="cover-badges">
-      <span class="cover-badge">Offre A — Fondamentaux</span>
-      <span class="cover-badge">Offre B — Parcours spécialisés</span>
-      <span class="cover-badge">Offre C — Executive Programme</span>
-    </div>
-  </div>
-
-  <!-- SLIDE 2 — Partenariat -->
-  <div class="slide" id="slide-2">
-    <div class="slide-tag tag-teal">Contexte</div>
-    <h2>Le partenariat ESCA × ESA Paris × FMA</h2>
-    <div class="subtitle">Historique & enseignements</div>
-    <ul class="blist">
-      <li><span class="bull" style="color:#085041;">—</span>Partenariat tripartite : FMA, ESCA et ESA Paris — actif depuis 2015, accrédité par le Ministère de l'Enseignement Supérieur</li>
-      <li><span class="bull" style="color:#085041;">—</span>Master en Management des Assurances — format ayant évolué d'un Master 2 ans jusqu'à un Master en blocs sur 1 an</li>
-      <li><span class="bull" style="color:#085041;">—</span>Difficulté par rapport au recrutement des participants</li>
-      <li><span class="bull" style="color:#085041;">—</span>Formation suspendue en 2023 afin de réévaluer le potentiel sur le marché marocain</li>
-    </ul>
-  </div>
-
-  <!-- SLIDE 3 — Marché -->
-  <div class="slide" id="slide-3">
-    <div class="slide-tag tag-purple">Marché</div>
-    <h2>Un secteur en croissance, des besoins confirmés</h2>
-    <div class="subtitle">Étude de marché ACAPS & FMA</div>
-    <div class="two-col">
-      <div class="col-box">
-        <div class="sub-label" style="color:#3C3489; margin-top:0;">Chiffres clés</div>
-        <ul class="blist">
-          <li><span class="bull" style="color:#3C3489;">—</span>Environ 6 500 collaborateurs dans l'ensemble du secteur</li>
-          <li><span class="bull" style="color:#3C3489;">—</span>4 grandes compagnies représentent 48% des effectifs · la moitié dédiée aux fonctions supports</li>
-          <li><span class="bull" style="color:#3C3489;">—</span>Marché limité en nombre d'acteurs · Turn-over faible : ~5% annuellement</li>
-          <li><span class="bull" style="color:#3C3489;">—</span>Recrutements limités : ~300 opportunités sur 5 ans · Stabilité des effectifs</li>
-        </ul>
-      </div>
-      <div class="col-box">
-        <div class="sub-label" style="color:#3C3489; margin-top:0;">Conclusions</div>
-        <ul class="blist">
-          <li><span class="bull" style="color:#3C3489;">+</span>Marché restreint mais stable</li>
-          <li><span class="bull" style="color:#3C3489;">+</span>Nécessité de cibler précisément les besoins</li>
-          <li><span class="bull" style="color:#3C3489;">+</span>Importance de la formation continue vs. formation initiale</li>
-          <li><span class="bull" style="color:#3C3489;">+</span>Potentiel limité pour des cohortes importantes</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 4 — Approche -->
-  <div class="slide" id="slide-4">
-    <div class="slide-tag tag-amber">Approche</div>
-    <h2>Une offre repensée sur la base de l'écoute terrain</h2>
-    <div class="subtitle">Les principes directeurs de la nouvelle offre</div>
-    <div class="three-col">
-      <div class="card">
-        <div class="card-label" style="color:#854F0B;">Ciblage précis</div>
-        <p>Ne pas chercher le volume mais la qualité et la pertinence</p>
-      </div>
-      <div class="card">
-        <div class="card-label" style="color:#854F0B;">Formats adaptés</div>
-        <p>Courts, modulaires, flexibles — adaptés aux contraintes des professionnels</p>
-      </div>
-      <div class="card">
-        <div class="card-label" style="color:#854F0B;">Partenariats stratégiques</div>
-        <p>FMA, FNACAM, Académies internes des compagnies</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 5 — Architecture tableau -->
-  <div class="slide" id="slide-5">
-    <div class="slide-tag tag-gray">Offres</div>
-    <h2>Architecture de l'offre de formation</h2>
-    <div class="subtitle">3 niveaux complémentaires pour l'ensemble des profils du secteur</div>
-    <table style="width:100%; border-collapse:collapse;">
-      <thead>
-        <tr style="background:#f0ede6;">
-          <th style="padding:9px 14px; font-size:11px; font-weight:600; color:#888780; text-align:left; border-radius:8px 0 0 0;">Offre</th>
-          <th style="padding:9px 14px; font-size:11px; font-weight:600; color:#888780; text-align:left;">Intitulé</th>
-          <th style="padding:9px 14px; font-size:11px; font-weight:600; color:#888780; text-align:left;">Contenu</th>
-          <th style="padding:9px 14px; font-size:11px; font-weight:600; color:#888780; text-align:left;">Cible</th>
-          <th style="padding:9px 14px; font-size:11px; font-weight:600; color:#888780; text-align:left;">Mode</th>
-          <th style="padding:9px 14px; font-size:11px; font-weight:600; color:#888780; text-align:left; border-radius:0 8px 0 0;">Certification</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="background:#E1F5EE; border-bottom:3px solid #f5f4f0;">
-          <td style="padding:12px 14px;"><span style="font-size:11px; font-weight:700; color:#085041;">Offre A</span></td>
-          <td style="padding:12px 14px; font-size:12px; font-weight:600; color:#085041;">Fondamentaux assurance Maroc</td>
-          <td style="padding:12px 14px; font-size:12px; color:#0F6E56;">8 modules · Socle universel</td>
-          <td style="padding:12px 14px; font-size:12px; color:#0F6E56;">Nouvelles recrues</td>
-          <td style="padding:12px 14px; font-size:12px; color:#0F6E56;">Sur place & e-learning</td>
-          <td style="padding:12px 14px; font-size:11px; color:#085041;">Attestation ESCA × ESA Paris</td>
-        </tr>
-        <tr style="background:#EEEDFE; border-bottom:3px solid #f5f4f0;">
-          <td style="padding:12px 14px;"><span style="font-size:11px; font-weight:700; color:#3C3489;">Offre B</span></td>
-          <td style="padding:12px 14px; font-size:12px; font-weight:600; color:#3C3489;">Parcours professionnels spécialisés</td>
-          <td style="padding:12px 14px; font-size:12px; color:#534AB7;">5 parcours · Tronc commun + modules</td>
-          <td style="padding:12px 14px; font-size:12px; color:#534AB7;">Collaborateurs en approfondissement</td>
-          <td style="padding:12px 14px; font-size:12px; color:#534AB7;">Sur place & e-learning</td>
-          <td style="padding:12px 14px; font-size:11px; color:#3C3489;">Certificat FMA / FNACAM × ESA × ESCA</td>
-        </tr>
-        <tr style="background:#FAEEDA;">
-          <td style="padding:12px 14px;"><span style="font-size:11px; font-weight:700; color:#633806;">Offre C</span></td>
-          <td style="padding:12px 14px; font-size:12px; font-weight:600; color:#633806;">Executive Programme & Study Tour Paris</td>
-          <td style="padding:12px 14px; font-size:12px; color:#854F0B;">6 thématiques · Masterclasses + Paris</td>
-          <td style="padding:12px 14px; font-size:12px; color:#854F0B;">Cadres seniors</td>
-          <td style="padding:12px 14px; font-size:12px; color:#854F0B;">Sur place</td>
-          <td style="padding:12px 14px; font-size:11px; color:#633806;">Executive Certificate ESCA × ESA Paris</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- SLIDE 6 — Offre A -->
-  <div class="slide" id="slide-6">
-    <div class="slide-tag tag-teal">Offre A</div>
-    <h2>Fondamentaux assurance Maroc</h2>
-    <div class="subtitle">Socle universel · 8 modules · Cible : Nouvelles recrues</div>
-    <div class="four-col">
-      <div class="card" style="padding:11px 13px;"><div class="card-label" style="color:#085041;">Module 1</div><h3 style="font-size:12px;">Environnement & acteurs</h3><p style="font-size:11px;margin-top:3px;">Structure · ACAPS · FMA · FNACAM</p></div>
-      <div class="card" style="padding:11px 13px;"><div class="card-label" style="color:#085041;">Module 2</div><h3 style="font-size:12px;">Contrat & réglementation</h3><p style="font-size:11px;margin-top:3px;">Loi 17-99 · SBR · IFRS 17 · LAB/FT</p></div>
-      <div class="card" style="padding:11px 13px;"><div class="card-label" style="color:#085041;">Module 3</div><h3 style="font-size:12px;">Branches & produits</h3><p style="font-size:11px;margin-top:3px;">Vie · Auto · IRD · RC · AT/MP · Takaful</p></div>
-      <div class="card" style="padding:11px 13px;"><div class="card-label" style="color:#085041;">Module 4</div><h3 style="font-size:12px;">Principes de souscription</h3><p style="font-size:11px;margin-top:3px;">Introduction · Sélection · Tarification</p></div>
-      <div class="card" style="padding:11px 13px;"><div class="card-label" style="color:#085041;">Module 5</div><h3 style="font-size:12px;">Gestion des sinistres</h3><p style="font-size:11px;margin-top:3px;">Cycle sinistre · Évaluation · Indemnisation</p></div>
-      <div class="card" style="padding:11px 13px;"><div class="card-label" style="color:#085041;">Module 6</div><h3 style="font-size:12px;">Actuariat & risk management</h3><p style="font-size:11px;margin-top:3px;">Bases techniques · Résultats · SBR</p></div>
-      <div class="card" style="padding:11px 13px;"><div class="card-label" style="color:#085041;">Module 7</div><h3 style="font-size:12px;">Data analytics & digital</h3><p style="font-size:11px;margin-top:3px;">Données · Pricing · Transformation digitale</p></div>
-      <div class="card" style="padding:11px 13px;"><div class="card-label" style="color:#085041;">Module 8</div><h3 style="font-size:12px;">Distribution & animation</h3><p style="font-size:11px;margin-top:3px;">Réseaux · Vente · Bancassurance</p></div>
-    </div>
-  </div>
-
-  <!-- SLIDE 7 — Offre B parcours expandables -->
-  <div class="slide" id="slide-7">
-    <div class="slide-tag tag-purple">Offre B</div>
-    <h2>Parcours professionnels spécialisés</h2>
-    <div class="subtitle">Cliquez sur un parcours pour voir le détail · Tronc commun + modules par branche</div>
-    <div class="slide-7-inner"><div class="parcours-list">
-
-      <div class="parcours-item">
-        <div class="parcours-header" onclick="togP('p1')">
-          <span class="pnum">Parcours 1</span>
-          <span class="ptitle">Souscripteur</span>
-          <span class="psub-line">Compagnies · Entrée du risque</span>
-          <span class="pchev" id="chev-p1">›</span>
-        </div>
-        <div class="parcours-detail" id="p1">
-          <div><div class="det-section">Tronc commun</div><div class="det-item">Principes de souscription</div><div class="det-item">Analyse & sélection du risque</div><div class="det-item">Techniques de tarification</div><div class="det-item">Rédaction du contrat</div><div class="det-item">Réglementation ACAPS souscription</div></div>
-          <div><div class="det-section">Modules par branche</div><div class="det-item">Auto — RC obligatoire, tarification</div><div class="det-item">Personnes — souscription médicale, vie</div><div class="det-item">IRD & multirisques — visite de risque</div><div class="det-item">Grands risques — ingénierie, co-assurance</div></div>
-        </div>
-      </div>
-
-      <div class="parcours-item">
-        <div class="parcours-header" onclick="togP('p2')">
-          <span class="pnum">Parcours 2</span>
-          <span class="ptitle">Gestionnaire sinistres</span>
-          <span class="psub-line">Compagnies · Sortie du risque</span>
-          <span class="pchev" id="chev-p2">›</span>
-        </div>
-        <div class="parcours-detail" id="p2">
-          <div><div class="det-section">Tronc commun</div><div class="det-item">Process ouverture → clôture</div><div class="det-item">Évaluation & provisionnement</div><div class="det-item">Relation client en sinistre</div><div class="det-item">Aspects juridiques & contentieux</div><div class="det-item">Réglementation ACAPS sinistres</div></div>
-          <div><div class="det-section">Modules par branche</div><div class="det-item">Auto matériels — CIDA, expertise, recours</div><div class="det-item">Auto corporels — CICA, barème BIRSA</div><div class="det-item">Personnes — liquidation, DIM, AMO</div><div class="det-item">AT/MP — loi 18-12, rentes</div><div class="det-item">IRD — expertise contradictoire, pertes d'exploitation</div></div>
-        </div>
-      </div>
-
-      <div class="parcours-item">
-        <div class="parcours-header" onclick="togP('p3')">
-          <span class="pnum">Parcours 3</span>
-          <span class="ptitle">Gestionnaire assurances de personnes</span>
-          <span class="psub-line">Compagnies vie · Caisses retraite · Organismes prévoyance</span>
-          <span class="pchev" id="chev-p3">›</span>
-        </div>
-        <div class="parcours-detail" id="p3">
-          <div><div class="det-section">Tronc commun</div><div class="det-item">Réforme protection sociale au Maroc</div><div class="det-item">Produits vie, prévoyance & épargne</div><div class="det-item">Contrats collectifs entreprises</div><div class="det-item">Liquidation des prestations</div><div class="det-item">IFC — calcul & provisionnement</div><div class="det-item">CMR, RCAR, CNSS & complémentaire privée</div></div>
-          <div><div class="det-section">Modules</div><div class="det-item">Vie & capitalisation — épargne, unités de compte</div><div class="det-item">Prévoyance collective — DIM, assurance emprunteur</div><div class="det-item">AMO & complémentaire santé</div><div class="det-item">Retraite & IFC — rentes, régimes complémentaires</div></div>
-        </div>
-      </div>
-
-      <div class="parcours-item">
-        <div class="parcours-header" onclick="togP('p4a')">
-          <span class="pnum">Parcours 4A</span>
-          <span class="ptitle">Animateur réseau</span>
-          <span class="psub-line">Compagnies · Pilotage des intermédiaires</span>
-          <span class="pchev" id="chev-p4a">›</span>
-        </div>
-        <div class="parcours-detail" id="p4a">
-          <div><div class="det-section">Tronc commun</div><div class="det-item">Distribution au Maroc — cadre ACAPS</div><div class="det-item">Animation & pilotage de la performance</div><div class="det-item">Outils de suivi & reporting réseau</div><div class="det-item">Techniques de vente & argumentation</div><div class="det-item">Relation compagnie / intermédiaire</div></div>
-          <div><div class="det-section">Modules par canal</div><div class="det-item">Agents — portefeuille, développement, fidélisation</div><div class="det-item">Courtiers — appels d'offres, grands comptes</div><div class="det-item">Bancassurance — partenariat banque-assureur</div></div>
-        </div>
-      </div>
-
-      <div class="parcours-item">
-        <div class="parcours-header" onclick="togP('p4b')">
-          <span class="pnum">Parcours 4B</span>
-          <span class="ptitle">Agent & courtier professionnel</span>
-          <span class="psub-line">Intermédiaires indépendants · FNACAM</span>
-          <span class="pchev" id="chev-p4b">›</span>
-        </div>
-        <div class="parcours-detail" id="p4b">
-          <div><div class="det-section">Tronc commun</div><div class="det-item">Réglementation intermédiation (loi 17-99)</div><div class="det-item">Déontologie & obligations professionnelles</div><div class="det-item">Connaissance des produits d'assurance</div><div class="det-item">Techniques de conseil & vente</div><div class="det-item">Gestion administrative du cabinet</div></div>
-          <div><div class="det-section">Modules</div><div class="det-item">Développement commercial — prospection, fidélisation</div><div class="det-item">Conseil personnes — prévoyance, épargne, retraite</div><div class="det-item">Sinistres côté intermédiaire</div><div class="det-item">Digital & outils</div></div>
-        </div>
-      </div>
-
-    </div>
-      </div></div>
-
-  <!-- SLIDE 8 — Offre C -->
-  <div class="slide" id="slide-8">
-    <div class="slide-tag tag-amber">Offre C</div>
-    <h2>Executive Programme & Study Tour Paris</h2>
-    <div class="subtitle">Masterclasses Casablanca & Paris · Cible : Cadres seniors</div>
-    <div class="two-col">
-      <div class="col-box">
-        <div class="sub-label" style="color:#854F0B; margin-top:0;">Thématiques des masterclasses</div>
-        <div class="tour-item"><div class="tdot dot-amber"></div><div class="tour-text">Stratégie & gouvernance de l'assurance</div></div>
-        <div class="tour-item"><div class="tdot dot-amber"></div><div class="tour-text">IA & transformation digitale</div></div>
-        <div class="tour-item"><div class="tdot dot-amber"></div><div class="tour-text">Risques émergents (Cyber · Climatique · ESG)</div></div>
-        <div class="tour-item"><div class="tdot dot-amber"></div><div class="tour-text">Développement en Afrique</div></div>
-        <div class="tour-item"><div class="tdot dot-amber"></div><div class="tour-text">Réassurance stratégique</div></div>
-        <div class="tour-item"><div class="tdot dot-amber"></div><div class="tour-text">Réforme & régulation (ACAPS · SBR · IFRS 17)</div></div>
-        <div class="pills" style="margin-top:10px;"><span class="pill pill-gray">Dispensées à Casablanca & à Paris</span></div>
-      </div>
-      <div class="col-box" style="background:#FAECE7; border-color:#F5C4B3;">
-        <div class="sub-label" style="color:#712B13; margin-top:0;">Study Tour Paris — ESA</div>
-        <div class="tour-item"><div class="tdot dot-coral"></div><div class="tour-text">Masterclasses ESA Paris — experts de haut niveau</div></div>
-        <div class="tour-item"><div class="tdot dot-coral"></div><div><div class="tour-text">Visites de compagnies françaises</div><div class="tour-sub">AXA, Covéa, MAIF, Groupama…</div></div></div>
-        <div class="tour-item"><div class="tdot dot-coral"></div><div><div class="tour-text">Visite Lloyd's & grands réassureurs</div><div class="tour-sub">Profils techniques & réassurance</div></div></div>
-        <div class="tour-item"><div class="tdot dot-coral"></div><div class="tour-text">Dîner networking — professionnels français & participants marocains</div></div>
-        <div class="pills" style="margin-top:10px;"><span class="pill pill-amber">Executive Certificate ESCA × ESA Paris</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SLIDE 9 — Synthèse -->
-  <div class="slide" id="slide-9">
-    <div class="slide-tag tag-gray">Synthèse</div>
-    <h2>Certifications & modes d'enseignement</h2>
-    <div class="subtitle">Vue d'ensemble des trois offres</div>
-    <div class="four-col">
-      <div class="cert-card" style="border-top:3px solid #5DCAA5;">
-        <div class="clabel" style="color:#085041;">Offre A</div>
-        <div class="cvalue">Attestation ESCA × ESA Paris</div>
-        <div class="csub">Délivrée à l'issue de chaque module</div>
-        <div class="pills"><span class="pill pill-teal">Sur place & e-learning</span></div>
-      </div>
-      <div class="cert-card" style="border-top:3px solid #AFA9EC;">
-        <div class="clabel" style="color:#3C3489;">Offre B — Parcours 1, 2, 3, 4A</div>
-        <div class="cvalue">Certificat label FMA × ESA × ESCA</div>
-        <div class="csub">Co-délivré avec la FMA</div>
-        <div class="pills"><span class="pill pill-purple">Sur place & e-learning</span></div>
-      </div>
-      <div class="cert-card" style="border-top:3px solid #AFA9EC;">
-        <div class="clabel" style="color:#3C3489;">Offre B — Parcours 4B</div>
-        <div class="cvalue">Certificat label FNACAM × ESA × ESCA</div>
-        <div class="csub">Co-délivré avec la FNACAM</div>
-        <div class="pills"><span class="pill pill-purple">Sur place & e-learning</span></div>
-      </div>
-      <div class="cert-card" style="border-top:3px solid #FAC775;">
-        <div class="clabel" style="color:#633806;">Offre C</div>
-        <div class="cvalue">Executive Certificate ESCA × ESA Paris</div>
-        <div class="csub">Délivré à l'issue du cycle complet</div>
-        <div class="pills"><span class="pill pill-amber">Sur place</span></div>
-      </div>
-    </div>
-  </div>
-
+<!-- ══ PAGE HEADER ══ -->
+<div class="page-header">
+  <div class="ph-label">ESCA × ESA Paris</div>
+  <h1>Offres de formation</h1>
+  <div class="ph-update">Mise à jour à la lumière des feed-backs des DRH — séance du 7 avril 2026</div>
 </div>
 
-<!-- Navigation -->
-<div class="nav">
-  <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)" disabled>‹</button>
-  <div class="nav-dots" id="dots"></div>
-  <span class="slide-counter" id="counter">1 / 9</span>
-  <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">›</button>
+<!-- ══ OFFRE A — SUPPRIMÉE ══ -->
+<div class="offre-a-box">
+  <span class="oa-badge">Offre A — supprimée</span>
+  <div class="oa-text"><strong>Fondamentaux assurance Maroc</strong> — redondance avec ce que les académies internes font. Cette offre a été retirée du dispositif.</div>
+</div>
+
+<!-- ══ OFFRE B ══ -->
+<div class="offer-section">
+  <div class="label-tag">Offre B</div>
+  <div class="offer-title">Certificats professionnels de référence<br>du secteur de l'assurance au Maroc</div>
+  <div class="offer-desc">Des parcours modulaires progressifs — du niveau confirmé au niveau avancé — sur des thématiques transverses à tout le secteur.</div>
+
+  <div class="section-title">Ce que nous offrons</div>
+  <div class="section-sub">Trois propositions de valeur :</div>
+  <div class="value-grid">
+    <div class="value-card">
+      <div class="vc-num">01</div>
+      <div class="vc-title">Certifications reconnues — une référence sectorielle</div>
+      <div class="vc-desc">Des certificats co-délivrés par les institutions de référence du secteur. Une valeur portable par le collaborateur, visible sur le marché.</div>
+      <div class="vc-badges">
+        <span class="vc-badge g">FMA</span><span class="vc-badge a">ACAPS</span><span class="vc-badge b">FNACAM</span><span class="vc-badge p">ESA Paris</span><span class="vc-badge p">ESCA</span>
+      </div>
+    </div>
+    <div class="value-card">
+      <div class="vc-num">02</div>
+      <div class="vc-title">Reconnaissance professionnelle institutionnelle</div>
+      <div class="vc-desc">Les certifications sont portées par le régulateur et les fédérations professionnelles.</div>
+      <div class="vc-badges">
+        <span class="vc-badge g">Label FMA</span><span class="vc-badge b">Label FNACAM</span><span class="vc-badge a">Label ACAPS</span>
+      </div>
+    </div>
+    <div class="value-card">
+      <div class="vc-num">03</div>
+      <div class="vc-title">Du niveau confirmé au niveau avancé</div>
+      <div class="vc-desc">Chaque parcours progresse du fondamental sectoriel vers des modules avancés, enseignés par des formateurs internationaux.</div>
+      <div class="vc-badges">
+        <span class="vc-badge g">Confirmé</span><span class="vc-badge p">Avancé</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">5 parcours certifiants</div>
+  <div class="section-sub">Chaque parcours est composé de 5 modules indépendants et progressifs, applicables dans toute compagnie du secteur.</div>
+
+  <div class="parcours-tabs">
+    <div class="tab active" onclick="showPanel(0)">Souscription</div>
+    <div class="tab" onclick="showPanel(1)">Sinistres</div>
+    <div class="tab" onclick="showPanel(2)">Assurances de personnes</div>
+    <div class="tab" onclick="showPanel(3)">Distribution</div>
+    <div class="tab" onclick="showPanel(4)">Risk & Conformité</div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot inter"></div> Niveau confirmé</div>
+    <div class="legend-item"><div class="legend-dot adv"></div> Niveau avancé</div>
+  </div>
+
+  <!-- P1 -->
+  <div id="panel-0" class="parcours-panel visible">
+    <div class="certif-banner"><div class="cb-icon">◆</div><div class="cb-body"><div class="cb-title">Certificat professionnel — Souscription</div><div class="cb-badges"><span class="cb-badge">ESA Paris</span><span class="cb-badge">ESCA</span><span class="cb-badge">FMA</span></div></div></div>
+    <div class="panel-header"><h2>Parcours Souscription</h2><div class="panel-sub">Compagnies d'assurance · Entrée du risque · Applicable toutes branches</div></div>
+    <div class="cible-row"><span class="cible-label">Cible</span><span class="cible-val">Souscripteurs avec 2 à 5 ans d'expérience · Chargés de portefeuille · Inspecteurs production</span></div>
+    <div class="formateur-note"><strong>Intervenants :</strong> M1–M4 → experts marocains · M5 → intervenants ESA Paris</div>
+    <div class="modules-list">
+      <div class="module-row"><div class="module-num">M1</div><div class="module-content"><div class="module-title">Cadre réglementaire de la souscription au Maroc</div><div class="module-themes">Loi 17-99 · Circulaires ACAPS · Obligations de souscription · Refus et résiliation · Note de couverture</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M2</div><div class="module-content"><div class="module-title">Analyse & sélection du risque</div><div class="module-themes">Méthodes d'évaluation · Visite de risque · Critères techniques de sélection · Rédaction des conditions particulières</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M3</div><div class="module-content"><div class="module-title">Techniques de tarification — branches principales</div><div class="module-themes">Tarification Auto · IRD · Personnes · Bases statistiques · Coefficient de chargement · Rentabilité du portefeuille</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M4</div><div class="module-content"><div class="module-title">Maritime, Transport & Grands risques</div><div class="module-themes">Corps & facultés · Clauses Institute · Co-assurance · Risques industriels · Appels d'offres grands comptes</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row advanced"><div class="module-num">M5</div><div class="module-content"><div class="module-title">Tarification avancée & impact SBR sur la souscription</div><div class="module-themes">Modèles prédictifs · Segmentation · Exigences SBR sur les engagements techniques · Politique de souscription et solvabilité</div></div><span class="level-badge adv">avancé</span></div>
+    </div>
+  </div>
+
+  <!-- P2 -->
+  <div id="panel-1" class="parcours-panel">
+    <div class="certif-banner"><div class="cb-icon">◆</div><div class="cb-body"><div class="cb-title">Certificat professionnel — Sinistres</div><div class="cb-badges"><span class="cb-badge">ESA Paris</span><span class="cb-badge">ESCA</span><span class="cb-badge">FMA</span></div></div></div>
+    <div class="panel-header"><h2>Parcours Sinistres</h2><div class="panel-sub">Compagnies d'assurance · Sortie du risque · Applicable toutes branches</div></div>
+    <div class="cible-row"><span class="cible-label">Cible</span><span class="cible-val">Gestionnaires sinistres expérimentés · Responsables règlements · Inspecteurs sinistres</span></div>
+    <div class="formateur-note"><strong>Intervenants :</strong> M1–M4 → experts marocains · M5 → intervenants ESA Paris</div>
+    <div class="modules-list">
+      <div class="module-row"><div class="module-num">M1</div><div class="module-content"><div class="module-title">Cadre juridique & réglementaire des sinistres au Maroc</div><div class="module-themes">Loi 17-99 · Délais réglementaires ACAPS · Obligations d'indemnisation · Prescription · Recours & subrogation</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M2</div><div class="module-content"><div class="module-title">Indemnisation corporelle — CICA & barème BIRSA</div><div class="module-themes">CICA — application pratique · Barème BIRSA · Évaluation du préjudice · Jurisprudence marocaine récente</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M3</div><div class="module-content"><div class="module-title">Sinistres AT/MP & IRD</div><div class="module-themes">Loi 18-12 · Qualification AT/MP · Calcul des rentes · Pertes d'exploitation · Expertise contradictoire</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M4</div><div class="module-content"><div class="module-title">Relation client & gestion des réclamations</div><div class="module-themes">Traitement des insatisfactions · Communication en sinistre · Médiation · Exigences ACAPS sur les délais de réponse</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row advanced"><div class="module-num">M5</div><div class="module-content"><div class="module-title">Provisionnement technique & pilotage de la sinistralité</div><div class="module-themes">Méthodes de provisionnement · Chain-Ladder · IBNR · Analyse de la sinistralité · Impact sur les résultats techniques</div></div><span class="level-badge adv">avancé</span></div>
+    </div>
+  </div>
+
+  <!-- P3 -->
+  <div id="panel-2" class="parcours-panel">
+    <div class="certif-banner"><div class="cb-icon">◆</div><div class="cb-body"><div class="cb-title">Certificat professionnel — Assurances de personnes</div><div class="cb-badges"><span class="cb-badge">ESA Paris</span><span class="cb-badge">ESCA</span><span class="cb-badge">FMA</span></div></div></div>
+    <div class="panel-header"><h2>Parcours Assurances de personnes</h2><div class="panel-sub">Compagnies vie · Caisses de retraite · Organismes de prévoyance</div></div>
+    <div class="cible-row"><span class="cible-label">Cible</span><span class="cible-val">Gestionnaires vie & prévoyance · Responsables contrats collectifs · Cadres caisses de retraite</span></div>
+    <div class="formateur-note"><strong>Intervenants :</strong> M1–M3 → experts marocains · M4–M5 → intervenants ESA Paris</div>
+    <div class="modules-list">
+      <div class="module-row"><div class="module-num">M1</div><div class="module-content"><div class="module-title">Produits vie, prévoyance & épargne au Maroc</div><div class="module-themes">Cadre réglementaire ACAPS · Produits vie individuelle & collective · Takaful · Épargne retraite · Assurance emprunteur</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M2</div><div class="module-content"><div class="module-title">Réforme de la protection sociale & AMO</div><div class="module-themes">Architecture AMO au Maroc · Articulation avec les complémentaires privées · Gestion déléguée · Opportunités pour le secteur</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M3</div><div class="module-content"><div class="module-title">Retraite & IFC — régimes et obligations</div><div class="module-themes">CMR · RCAR · CNSS · Régimes complémentaires · IFC — calcul & obligations employeur · Liquidation des rentes</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row advanced"><div class="module-num">M4</div><div class="module-content"><div class="module-title">Actuariat vie — bases techniques</div><div class="module-themes">Tables de mortalité · Calcul des primes pures · Provisions mathématiques · Bases techniques des contrats · Tarification santé collective</div></div><span class="level-badge adv">avancé</span></div>
+      <div class="module-row advanced"><div class="module-num">M5</div><div class="module-content"><div class="module-title">IFRS 17 — impact sur les assurances de personnes</div><div class="module-themes">Nouveaux modèles de mesure · Impact sur les provisions vie · Reporting IFRS 17 · Cas pratiques secteur assurance</div></div><span class="level-badge adv">avancé</span></div>
+    </div>
+  </div>
+
+  <!-- P4 -->
+  <div id="panel-3" class="parcours-panel">
+    <div class="certif-banner"><div class="cb-icon">◆</div><div class="cb-body"><div class="cb-title">Certificat professionnel — Distribution</div><div class="cb-badges"><span class="cb-badge">ESA Paris</span><span class="cb-badge">ESCA</span><span class="cb-badge">FMA</span><span class="cb-badge fn">FNACAM</span></div></div></div>
+    <div class="panel-header"><h2>Parcours Distribution</h2><div class="panel-sub">Intermédiaires indépendants & animateurs réseau · Porté conjointement par la FMA & la FNACAM</div></div>
+    <div class="cible-row"><span class="cible-label">Cible</span><span class="cible-val">Agents généraux · Courtiers · Collaborateurs de cabinets · Animateurs réseau compagnies</span></div>
+    <div class="formateur-note"><strong>Intervenants :</strong> M1–M4 → experts marocains · M5 → intervenants ESA Paris</div>
+    <div class="modules-list">
+      <div class="module-row"><div class="module-num">M1</div><div class="module-content"><div class="module-title">Réglementation de la distribution au Maroc</div><div class="module-themes">Loi 17-99 · Conditions d'agrément · Obligations professionnelles · Responsabilité civile · Contrôle ACAPS</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M2</div><div class="module-content"><div class="module-title">Techniques de conseil & vente en assurance</div><div class="module-themes">Analyse des besoins client · Devoir de conseil · Argumentation · Gestion des objections · Fidélisation du portefeuille</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M3</div><div class="module-content"><div class="module-title">Conseil patrimonial — prévoyance, épargne, retraite</div><div class="module-themes">Produits vie & épargne · Prévoyance individuelle & collective · Assurance emprunteur · Argumentation financière</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M4</div><div class="module-content"><div class="module-title">Conformité & LAB/FT pour la distribution</div><div class="module-themes">Obligations LAB/FT · Vigilance client · Déclaration de soupçon · Devoir de conseil · Sanctions ACAPS</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row advanced"><div class="module-num">M5</div><div class="module-content"><div class="module-title">Gestion du cabinet & distribution digitale</div><div class="module-themes">Indicateurs de rentabilité · Développement & succession · Distribution en ligne · Insurtechs & comparateurs · Transformation du métier</div></div><span class="level-badge adv">avancé</span></div>
+    </div>
+  </div>
+
+  <!-- P5 -->
+  <div id="panel-4" class="parcours-panel">
+    <div class="certif-banner"><div class="cb-icon">◆</div><div class="cb-body"><div class="cb-title">Certificat professionnel — Risk & Conformité</div><div class="cb-badges"><span class="cb-badge">ESA Paris</span><span class="cb-badge">ESCA</span><span class="cb-badge">FMA</span></div></div></div>
+    <div class="panel-header"><h2>Parcours Risk & Conformité</h2><div class="panel-sub">Transversal · Toutes compagnies · Organismes de contrôle</div></div>
+    <div class="cible-row"><span class="cible-label">Cible</span><span class="cible-val">Responsables conformité · Risk managers · Auditeurs internes · Cadres DAF & direction technique</span></div>
+    <div class="formateur-note"><strong>Intervenants :</strong> M1–M2 → experts marocains · M3–M5 → intervenants ESA Paris</div>
+    <div class="modules-list">
+      <div class="module-row"><div class="module-num">M1</div><div class="module-content"><div class="module-title">Conformité réglementaire dans l'assurance au Maroc</div><div class="module-themes">Cadre ACAPS · Obligations de conformité · Gouvernance interne · Fonction de contrôle · Reporting réglementaire</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M2</div><div class="module-content"><div class="module-title">LAB/FT dans le secteur de l'assurance</div><div class="module-themes">Obligations sectorielles · Vigilance client · Déclaration de soupçon · Évolutions GAFI · Cas pratiques marocains</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row"><div class="module-num">M3</div><div class="module-content"><div class="module-title">Gestion des risques opérationnels</div><div class="module-themes">Cartographie des risques · Plans de continuité · Indicateurs de risque · Dispositif de contrôle interne · Cyber-risques</div></div><span class="level-badge inter">confirmé</span></div>
+      <div class="module-row advanced"><div class="module-num">M4</div><div class="module-content"><div class="module-title">SBR — Solvabilité Basée sur le Risque</div><div class="module-themes">Architecture SBR au Maroc · SCR & MCR · Pilier 2 gouvernance · Pilier 3 reporting · Impacts sur la gestion des fonds propres</div></div><span class="level-badge adv">avancé</span></div>
+      <div class="module-row advanced"><div class="module-num">M5</div><div class="module-content"><div class="module-title">RSE, ESG & risques climatiques dans l'assurance</div><div class="module-themes">Obligations de reporting ESG · Risques climatiques & modélisation · Produits durables · Tendances réglementaires internationales</div></div><span class="level-badge adv">avancé</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ OFFRE C ══ -->
+<hr class="divider">
+<div class="offre-c">
+  <div class="label-tag">Offre C</div>
+  <div class="c-hero">
+    <h2>Executive Programme & Study Tour Paris</h2>
+    <p>Masterclasses à Casablanca et à Paris pour les cadres seniors du secteur — stratégie, gouvernance, innovation et mise en réseau internationale.</p>
+    <div class="c-badges">
+      <span class="c-badge amber">Executive Certificate</span>
+      <span class="c-badge purple">ESA Paris</span>
+      <span class="c-badge purple">ESCA</span>
+      <span class="c-badge teal">FMA</span>
+    </div>
+  </div>
+
+  <div class="c-certif">
+    <div class="cc-icon">◆</div>
+    <div class="cb-body">
+      <div class="cc-title">Executive Certificate ESCA × ESA Paris</div>
+      <div class="cc-badges">
+        <span class="cc-badge">ESA Paris</span>
+        <span class="cc-badge">ESCA</span>
+        <span class="cc-badge">FMA</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="cible-row" style="margin-bottom:1.5rem;">
+    <span class="cible-label">Cible</span>
+    <span class="cible-val">Directeurs généraux adjoints · Directeurs techniques · DAF · Directeurs des opérations · Cadres à haut potentiel</span>
+  </div>
+
+  <div class="c-grid">
+    <div>
+      <div class="c-col-title">6 thématiques — Masterclasses Casablanca</div>
+      <div class="c-theme-list">
+        <div class="c-theme"><div class="c-theme-title">Stratégie & gouvernance de l'assurance</div><div class="c-theme-sub">Modèles de croissance · Gouvernance des compagnies · Pilotage de la performance</div></div>
+        <div class="c-theme"><div class="c-theme-title">IA & transformation digitale</div><div class="c-theme-sub">Insurtechs · Data & pricing · Automatisation des process · Expérience client</div></div>
+        <div class="c-theme"><div class="c-theme-title">Risques émergents</div><div class="c-theme-sub">Cyber · Climatique · ESG · Nouveaux risques systémiques</div></div>
+        <div class="c-theme"><div class="c-theme-title">Développement en Afrique</div><div class="c-theme-sub">Marchés subsahariens · Stratégies d'expansion · Microassurance · Partenariats</div></div>
+        <div class="c-theme"><div class="c-theme-title">Réassurance stratégique</div><div class="c-theme-sub">Traités & facultatives · Sélection des réassureurs · Négociation · Tendances du marché</div></div>
+        <div class="c-theme"><div class="c-theme-title">Réforme & régulation</div><div class="c-theme-sub">ACAPS · SBR · IFRS 17 · Impacts stratégiques pour les dirigeants</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="c-col-title">Study Tour Paris — ESA</div>
+      <div class="c-studytour" style="margin-bottom:0;">
+        <div class="c-st-list">
+          <div class="c-st-item"><div class="c-st-dot"></div><div class="c-st-text"><strong>Masterclasses ESA Paris</strong> — experts et praticiens de haut niveau du marché français</div></div>
+          <div class="c-st-item"><div class="c-st-dot"></div><div class="c-st-text"><strong>Visites de compagnies françaises</strong> — AXA, Covéa, MAIF, Groupama</div></div>
+          <div class="c-st-item"><div class="c-st-dot"></div><div class="c-st-text"><strong>Visite Lloyd's & grands réassureurs</strong> — pour les profils techniques et réassurance</div></div>
+          <div class="c-st-item"><div class="c-st-dot"></div><div class="c-st-text"><strong>Dîner networking</strong> — professionnels français & participants marocains</div></div>
+          <div class="c-st-item"><div class="c-st-dot"></div><div class="c-st-text"><strong>Executive Certificate</strong> délivré à l'issue du cycle complet</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 
 <script>
-  var total = 9, current = 1;
-  var dotsEl = document.getElementById('dots');
-  for (var i = 1; i <= total; i++) {
-    var d = document.createElement('div');
-    d.className = 'ndot' + (i===1?' active':'');
-    d.onclick = (function(n){return function(){goTo(n);};})(i);
-    dotsEl.appendChild(d);
-  }
-  function goTo(n) {
-    document.getElementById('slide-'+current).classList.remove('active');
-    document.querySelectorAll('.ndot')[current-1].classList.remove('active');
-    current = n;
-    document.getElementById('slide-'+current).classList.add('active');
-    document.querySelectorAll('.ndot')[current-1].classList.add('active');
-    document.getElementById('counter').textContent = current+' / '+total;
-    document.getElementById('prev-btn').disabled = current===1;
-    document.getElementById('next-btn').disabled = current===total;
-  }
-  function changeSlide(dir) { var n=current+dir; if(n>=1&&n<=total) goTo(n); }
-  document.addEventListener('keydown', function(e){
-    if(e.key==='ArrowRight'||e.key==='ArrowDown') changeSlide(1);
-    if(e.key==='ArrowLeft'||e.key==='ArrowUp') changeSlide(-1);
-  });
-  function togP(id) {
-    var d=document.getElementById(id), c=document.getElementById('chev-'+id);
-    var o=d.classList.contains('open');
-    document.querySelectorAll('.parcours-detail').forEach(function(el){el.classList.remove('open');});
-    document.querySelectorAll('.pchev').forEach(function(el){el.classList.remove('open');});
-    if(!o){d.classList.add('open');c.classList.add('open');}
-  }
+function showPanel(idx) {
+  document.querySelectorAll('.parcours-panel').forEach(p => p.classList.remove('visible'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + idx).classList.add('visible');
+  document.querySelectorAll('.tab')[idx].classList.add('active');
+}
 </script>
-</body>
-</html>
